@@ -2839,12 +2839,11 @@ namespace MBBSEmu.CPU
             var offset = GetOperandOffset(_currentInstruction.Op0Kind);
             var floatToMultiply = Memory.GetArray(Registers.DS, offset, 4);
 
-            Registers.Fpu.PopStackTop();
-            var float1 = BitConverter.ToSingle(FpuStack[Registers.Fpu.GetStackTop()]);
+            var float1 = BitConverter.ToSingle(FpuStack[0]);
             var float2 = BitConverter.ToSingle(floatToMultiply);
 
             var result = float1 + float2;
-            FpuStack[Registers.Fpu.GetStackTop()] = BitConverter.GetBytes(result);
+            FpuStack[0] = BitConverter.GetBytes(result);
             Registers.Fpu.PushStackTop();
         }
     }
