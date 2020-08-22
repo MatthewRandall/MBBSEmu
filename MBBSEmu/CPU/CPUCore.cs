@@ -2842,8 +2842,12 @@ namespace MBBSEmu.CPU
             var float1 = BitConverter.ToSingle(FpuStack[0]);
             var float2 = BitConverter.ToSingle(floatToMultiply);
 
-            var result = float1 + float2;
-            FpuStack[0] = BitConverter.GetBytes(result);
+            unchecked
+            {
+                var result = float1 + float2;
+                FpuStack[0] = BitConverter.GetBytes(result);
+            }
+
             Registers.Fpu.PushStackTop();
         }
     }
